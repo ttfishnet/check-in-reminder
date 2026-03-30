@@ -1,5 +1,7 @@
 # Check-in Reminder
 
+[![CI](https://github.com/ttfishnet/check-in-reminder/actions/workflows/ci.yml/badge.svg)](https://github.com/ttfishnet/check-in-reminder/actions/workflows/ci.yml)
+
 A smart Flutter app that reminds you to clock in/out based on geofencing and Wi-Fi detection.
 
 ## Features
