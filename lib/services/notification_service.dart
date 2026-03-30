@@ -1,3 +1,4 @@
+import 'dart:developer' as developer;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationService {
@@ -68,7 +69,7 @@ class NotificationService {
       iOS: iosDetails,
     );
     try {
-      print('[Notification] show id=$id, title=$title, body=$body');
+      developer.log('show id=$id, title=$title, body=$body', name: 'Notification');
       await _plugin.show(
         id: id,
         title: title,
@@ -76,10 +77,9 @@ class NotificationService {
         notificationDetails: details,
         payload: payload,
       );
-      print('[Notification] show succeeded');
+      developer.log('show succeeded', name: 'Notification');
     } catch (e, stack) {
-      print('[Notification] show failed: $e');
-      print('[Notification] stack: $stack');
+      developer.log('show failed: $e', name: 'Notification', error: e, stackTrace: stack);
     }
   }
 

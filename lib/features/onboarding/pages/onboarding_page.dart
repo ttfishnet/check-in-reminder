@@ -234,33 +234,38 @@ class _AppSelectorPageState extends ConsumerState<_AppSelectorPage> {
                   ),
             ),
             const SizedBox(height: 24),
-            ...apps.map((app) {
-              final icon = switch (app.key) {
-                'dingtalk' => Icons.chat,
-                'wxwork' => Icons.work,
-                'lark' => Icons.flight,
-                _ => Icons.apps,
-              };
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                child: RadioListTile<String>(
-                  title: Text(app.name),
-                  secondary: Icon(icon),
-                  value: app.key,
-                  groupValue: _selectedApp,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  onChanged: (v) {
-                    setState(() => _selectedApp = v!);
-                    final settings = ref.read(settingsProvider);
-                    ref.read(settingsProvider.notifier).updateSettings(
-                          settings.copyWith(attendanceApp: v!),
-                        );
-                  },
-                ),
-              );
-            }),
+            RadioGroup<String>(
+              groupValue: _selectedApp,
+              onChanged: (v) {
+                if (v == null) return;
+                setState(() => _selectedApp = v);
+                final settings = ref.read(settingsProvider);
+                ref.read(settingsProvider.notifier).updateSettings(
+                      settings.copyWith(attendanceApp: v),
+                    );
+              },
+              child: Column(
+                children: apps.map((app) {
+                  final icon = switch (app.key) {
+                    'dingtalk' => Icons.chat,
+                    'wxwork' => Icons.work,
+                    'lark' => Icons.flight,
+                    _ => Icons.apps,
+                  };
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: RadioListTile<String>(
+                      title: Text(app.name),
+                      secondary: Icon(icon),
+                      value: app.key,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
           ],
         ),
       ),

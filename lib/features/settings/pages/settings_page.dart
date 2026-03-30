@@ -173,20 +173,22 @@ class SettingsPage extends ConsumerWidget {
 
           // Attendance app
           _SectionHeader(title: l10n.attendanceApp),
-          ...attendanceApps.map((app) {
-            return RadioListTile<String>(
-              title: Text(app.name),
-              value: app.key,
-              groupValue: settings.attendanceApp,
-              onChanged: (v) {
-                if (v != null) {
-                  ref.read(settingsProvider.notifier).updateSettings(
-                        settings.copyWith(attendanceApp: v),
-                      );
-                }
-              },
-            );
-          }),
+          RadioGroup<String>(
+            groupValue: settings.attendanceApp,
+            onChanged: (v) {
+              if (v != null) {
+                ref.read(settingsProvider.notifier).updateSettings(
+                      settings.copyWith(attendanceApp: v),
+                    );
+              }
+            },
+            child: Column(
+              children: attendanceApps.map((app) => RadioListTile<String>(
+                    title: Text(app.name),
+                    value: app.key,
+                  )).toList(),
+            ),
+          ),
 
           const Divider(),
           _SectionHeader(title: l10n.workDays),

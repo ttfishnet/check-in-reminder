@@ -101,21 +101,21 @@ Future<void> initGeofenceService(ProviderContainer container) async {
 
   try {
     final geofenceService = container.read(geofenceServiceProvider);
-    print('[GeofenceInit] Initializing plugin...');
+    developer.log('Initializing plugin...', name: 'GeofenceInit');
     await geofenceService.init();
-    print('[GeofenceInit] Plugin initialized');
+    developer.log('Plugin initialized', name: 'GeofenceInit');
 
     final storageService = container.read(storageServiceProvider);
     final locations = storageService.getLocations();
     final hasActive = locations.any((l) => l.isActive);
-    print('[GeofenceInit] Active locations: ${locations.where((l) => l.isActive).length}/${locations.length}');
+    developer.log('Active locations: ${locations.where((l) => l.isActive).length}/${locations.length}', name: 'GeofenceInit');
     if (hasActive) {
       await geofenceService.syncGeofences();
-      print('[GeofenceInit] syncGeofences done, isMonitoring=${geofenceService.isMonitoring}');
+      developer.log('syncGeofences done, isMonitoring=${geofenceService.isMonitoring}', name: 'GeofenceInit');
     } else {
-      print('[GeofenceInit] No active locations, skipping syncGeofences');
+      developer.log('No active locations, skipping syncGeofences', name: 'GeofenceInit');
     }
   } catch (e, st) {
-    print('[GeofenceInit] Initialization failed: $e\n$st');
+    developer.log('Initialization failed: $e', name: 'GeofenceInit', error: e, stackTrace: st);
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer' as developer;
 import 'package:flutter/services.dart';
 import 'package:flutter_background_geolocation/flutter_background_geolocation.dart'
     as bg;
@@ -69,43 +70,43 @@ class GeofenceService {
     final action = event.action;
     final now = DateTime.now();
 
-    print('[GeofenceEvent] Received: action=$action, id=$identifier, time=$now');
+    developer.log('Received: action=$action, id=$identifier, time=$now', name: 'GeofenceEvent');
 
     final settings = _storageService.getSettings();
 
     // 1) Check if notification is enabled for this event type
     if (action == 'ENTER' || action == 'DWELL') {
       if (!settings.notifyOnEnter) {
-        print('[GeofenceEvent] Filtered: notifyOnEnter=false');
+        developer.log('Filtered: notifyOnEnter=false', name: 'GeofenceEvent');
         return;
       }
     } else if (action == 'EXIT') {
       if (!settings.notifyOnExit) {
-        print('[GeofenceEvent] Filtered: notifyOnExit=false');
+        developer.log('Filtered: notifyOnExit=false', name: 'GeofenceEvent');
         return;
       }
     }
 
     // 2) Check if today is a workday
     if (!settings.workDays.contains(now.weekday)) {
-      print('[GeofenceEvent] Filtered: today is not a workday');
+      developer.log('Filtered: today is not a workday', name: 'GeofenceEvent');
       return;
     }
 
     // 3) Check if in silent hours
     if (_isSilentHours(now, settings)) {
-      print('[GeofenceEvent] Filtered: currently in silent period');
+      developer.log('Filtered: currently in silent period', name: 'GeofenceEvent');
       return;
     }
 
     // 4) Check if in cooldown period
     if (_isInCooldown(identifier, action, now, settings)) {
-      print('[GeofenceEvent] Filtered: in cooldown period');
+      developer.log('Filtered: in cooldown period', name: 'GeofenceEvent');
       return;
     }
 
     // All checks passed -> save record + send notification
-    print('[GeofenceEvent] All checks passed, sending notification...');
+    developer.log('All checks passed, sending notification...', name: 'GeofenceEvent');
     await _saveRecordAndNotify(identifier, action, now, settings);
   }
 
@@ -365,12 +366,14 @@ class GeofenceService {
         persist: false,
         timeout: 10,
       );
-      print('[GeofenceService] forceLocationCheck got location: '
+      developer.log(
+          'forceLocationCheck got location: '
           'lat=${location.coords.latitude}, lng=${location.coords.longitude}, '
           'accuracy=${location.coords.accuracy}m, '
-          'mock=${location.mock}');
+          'mock=${location.mock}',
+          name: 'GeofenceService');
     } catch (e) {
-      print('[GeofenceService] forceLocationCheck error: $e');
+      developer.log('forceLocationCheck error: $e', name: 'GeofenceService', error: e);
     }
   }
 
@@ -380,9 +383,9 @@ class GeofenceService {
     final now = DateTime.now();
     final settings = _storageService.getSettings();
 
-    print('[GeofenceSimulate] action=$action, locationId=$locationId');
+    developer.log('action=$action, locationId=$locationId', name: 'GeofenceSimulate');
     await _saveRecordAndNotify(locationId, action, now, settings);
-    print('[GeofenceSimulate] done');
+    developer.log('done', name: 'GeofenceSimulate');
   }
 
   /// Handle geofence event in headless mode (system wakes app after it's killed)
