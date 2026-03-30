@@ -1,0 +1,69 @@
+PODS:
+  - CocoaLumberjack (3.8.5):
+    - CocoaLumberjack/Core (= 3.8.5)
+  - CocoaLumberjack/Core (3.8.5)
+  - Flutter (1.0.0)
+  - flutter_background_geolocation (5.0.5):
+    - CocoaLumberjack (~> 3.8.5)
+    - Flutter
+    - TSLocationManager (~> 4.0.10)
+  - flutter_local_notifications (0.0.1):
+    - Flutter
+  - home_widget (0.0.1):
+    - Flutter
+  - network_info_plus (0.0.1):
+    - Flutter
+  - permission_handler_apple (9.3.0):
+    - Flutter
+  - TSBackgroundFetch (4.0.6)
+  - TSLocationManager (4.0.21):
+    - TSBackgroundFetch (~> 4.0.6)
+  - url_launcher_ios (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_background_geolocation (from `.symlinks/plugins/flutter_background_geolocation/ios`)
+  - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
+  - home_widget (from `.symlinks/plugins/home_widget/ios`)
+  - network_info_plus (from `.symlinks/plugins/network_info_plus/ios`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+
+SPEC REPOS:
+  trunk:
+    - CocoaLumberjack
+    - TSBackgroundFetch
+    - TSLocationManager
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_background_geolocation:
+    :path: ".symlinks/plugins/flutter_background_geolocation/ios"
+  flutter_local_notifications:
+    :path: ".symlinks/plugins/flutter_local_notifications/ios"
+  home_widget:
+    :path: ".symlinks/plugins/home_widget/ios"
+  network_info_plus:
+    :path: ".symlinks/plugins/network_info_plus/ios"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
+
+SPEC CHECKSUMS:
+  CocoaLumberjack: 6a459bc897d6d80bd1b8c78482ec7ad05dffc3f0
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  flutter_background_geolocation: b33ef8ad24fd3aedca8bf8170f438d32e31170dc
+  flutter_local_notifications: 643a3eda1ce1c0599413ca31672536d423dee214
+  home_widget: f169fc41fd807b4d46ab6615dc44d62adbf9f64f
+  network_info_plus: cf61925ab5205dce05a4f0895989afdb6aade5fc
+  permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
+  TSBackgroundFetch: 0afbeaae4e1132866e1d4b6e55265af26b5958ae
+  TSLocationManager: 4dec8151fe8085350b18acc13d47949b12774b57
+  url_launcher_ios: 7a95fa5b60cc718a708b8f2966718e93db0cef1b
+
+PODFILE CHECKSUM: 3c63482e143d1b91d2d2560aee9fb04ecc74ac7e
+
+COCOAPODS: 1.16.2
